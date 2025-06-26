@@ -27,6 +27,7 @@ async function loadSnippets() {
         }
         codeSnippets = await response.json();
         filteredSnippets = [...codeSnippets];
+        totalPages = Math.ceil(filteredSnippets.length / ITEMS_PER_PAGE);
         
         // Initialize the app after data is loaded
         populateLanguageFilter();
@@ -220,6 +221,7 @@ function renderSnippets() {
     
     if (filteredSnippets.length === 0) {
         container.innerHTML = '<div class="no-results">No snippets match your criteria. Try adjusting your filters.</div>';
+        renderPagination();
         return;
     }
 
@@ -241,6 +243,7 @@ function renderSnippets() {
             </div>
         </div>
     `).join('');
+    renderPagination();
 }
 
 /**

@@ -36,7 +36,7 @@
     "dateAdded": "2025-06-28"
   },
   {
-    "id": 4,
+    "id": 5,
     "title": "Export a Conda environment",
     "description": "There are a number of different ways to export a Conda environment. These must be run from inside an active environment.",
     "language": "conda",
@@ -45,7 +45,7 @@
     "dateAdded": "2025-06-28"
   },
   {
-    "id": 4,
+    "id": 6,
     "title": "Essential git commands",
     "description": "Essental git commands for checking, adding, committing and pushing changes.",
     "language": "git",
@@ -54,7 +54,7 @@
     "dateAdded": "2025-06-28"
   },
   {
-    "id": 4,
+    "id": 7,
     "title": "Python test template",
     "description": "This is the suggested test function layout in the Pytest documentation.",
     "language": "python",
@@ -63,12 +63,39 @@
     "dateAdded": "2025-06-28"
   },
   {
-    "id": 4,
+    "id": 8,
     "title": "Python test import fix",
     "description": "If your project folder is called <code>project/</code>, you have your tests in <code>project/tests/</code>, and the code you want to test in <code>project/src/package_name/</code>, add an <code>__init__.py</code> to <code>project/tests/</code> and include the following lines to ensure the imports work correctly.",
     "language": "python",
     "code": "import sys\n\nsys.path.append('src')",
     "tags": ["python", "testing", "tests", "pytest", "imports"],
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 9,
+    "title": "Basic Python Pyproject.toml template",
+    "description": "A pyproject.toml file allows your code package to be installed locally. The below configuration assumes the TOML file is in your project directory <code>project/</code> and that your Python package is in <code>project/src/package_name/</code>",
+    "language": "python",
+    "code": "[build-system]\nrequires = [\"setuptools\", \"wheel\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"example_name\"\nversion = \"0.1.0\"\ndescription = \"Brief description\"\nauthors = [{name = \"Your Name\"}]\nrequires-python = \">=3.13\"\n\n[tool.setuptools.packages.find]\nwhere = [\"src\"]\n",
+    "tags": ["python", "testing", "tests", "pytest", "imports"],
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 10,
+    "title": "Basic Conda environment template",
+    "description": "This Conda env will also install any local packages as editable installs (assuming there is a Pyproject.toml file present)",
+    "language": "conda",
+    "code": "name: example_name-env\n\n\nchannels:\n  - conda-forge\n  - nodefaults\n\ndependencies:\n  - python=3.13\n  - pytest\n  - blackd\n  - isort\n\n\n  # remove/modify these as needed\n  - numpy\n  - pandas\n\n\n  # keep this to install your Python package locally\n  - pip\n  - pip:\n    - --editable .",
+    "tags": ["conda", "dependencies", "environment"],
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 11,
+    "title": "Install Miniforge",
+    "description": "Install Miniforge on your machine for Open-Source Conda environment management. Read the <a href='https://github.com/conda-forge/miniforge' target='_blank'>Miniforge install instructions here.</a>",
+    "language": "conda",
+    "code": "name: example_name-env\n\n\nchannels:\n  - conda-forge\n  - nodefaults\n\ndependencies:\n  - python=3.13\n  - pytest\n  - blackd\n  - isort\n\n\n  # remove/modify these as needed\n  - numpy\n  - pandas\n\n\n  # keep this to install your Python package locally\n  - pip\n  - pip:\n    - --editable .",
+    "tags": ["conda", "bash", "install"],
     "dateAdded": "2025-06-28"
   }
 ]
