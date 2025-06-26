@@ -234,7 +234,7 @@ function renderSnippets() {
                 <div class="snippet-title">${escapeHtml(snippet.title)}</div>
                 <div class="snippet-language">${escapeHtml(snippet.language)}</div>
             </div>
-            <div class="snippet-description">${escapeHtml(snippet.description)}</div>
+            <div class="snippet-description">${snippet.description}</div>
             <div class="snippet-code"><pre><code>${escapeHtml(snippet.code)}</code></pre></div>
             <div class="snippet-tags">
                 ${snippet.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}

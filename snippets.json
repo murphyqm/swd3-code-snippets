@@ -1,56 +1,74 @@
 [
   {
     "id": 1,
-    "title": "Quick Sort Algorithm",
-    "description": "Efficient sorting algorithm using divide and conquer",
-    "language": "javascript",
-    "code": "function quickSort(arr) {\n    if (arr.length <= 1) return arr;\n    \n    const pivot = arr[Math.floor(arr.length / 2)];\n    const left = arr.filter(x => x < pivot);\n    const middle = arr.filter(x => x === pivot);\n    const right = arr.filter(x => x > pivot);\n    \n    return [...quickSort(left), ...middle, ...quickSort(right)];\n}",
-    "tags": ["algorithm", "sorting", "recursion"],
-    "dateAdded": "2024-01-15"
+    "title": "Essential linux/bash commands",
+    "description": "These basic bash commands will help you change directories or folders, check the path of your current directory, and list out the contents. Find a <a href='https://github.com/RehanSaeed/Bash-Cheat-Sheet' target='_blank'>full cheat sheet here.</a>",
+    "language": "bash",
+    "code": "cd # change directory to home\ncd /workspaces # return to the /workspaces directory\ncd .. # go up a level in the directory structure\nls # list the contents of the current directory\npwd # get the path to the current working directory",
+    "tags": ["bash", "linux"],
+    "dateAdded": "2025-06-28"
   },
   {
     "id": 2,
-    "title": "API Request with Error Handling",
-    "description": "Fetch data from API with proper error handling",
-    "language": "javascript",
-    "code": "async function fetchData(url) {\n    try {\n        const response = await fetch(url);\n        if (!response.ok) {\n            throw new Error(`HTTP error! status: ${response.status}`);\n        }\n        const data = await response.json();\n        return data;\n    } catch (error) {\n        console.error('Fetch error:', error);\n        throw error;\n    }\n}",
-    "tags": ["api", "async", "error-handling", "fetch"],
-    "dateAdded": "2024-01-20"
+    "title": "List Conda environments",
+    "description": "List existing conda environments; this can be run from <i>outside</i> an active environment.",
+    "language": "conda",
+    "code": "conda env list",
+    "tags": ["conda", "dependencies", "environment"],
+    "dateAdded": "2025-06-28"
   },
   {
     "id": 3,
-    "title": "Binary Search",
-    "description": "Efficient search algorithm for sorted arrays",
-    "language": "python",
-    "code": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    \n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    \n    return -1",
-    "tags": ["algorithm", "search", "binary"],
-    "dateAdded": "2024-01-18"
+    "title": "Create a Conda environment from a YAML file",
+    "description": "Use an <code>environment.yml</code> file to create a Conda environment.",
+    "language": "conda",
+    "code": "conda env create --file PATH/TO/A/FILE",
+    "tags": ["conda", "dependencies", "environment"],
+    "dateAdded": "2025-06-28"
   },
   {
     "id": 4,
-    "title": "CSS Flexbox Center",
-    "description": "Perfect centering with CSS Flexbox",
-    "language": "css",
-    "code": ".container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100vh;\n}\n\n.centered-content {\n    text-align: center;\n}",
-    "tags": ["css", "flexbox", "centering", "layout"],
-    "dateAdded": "2024-01-22"
+    "title": "Activate a Conda environment",
+    "description": "This must be done after creating an environment in order to use it.",
+    "language": "conda",
+    "code": "conda activate ENV-NAME",
+    "tags": ["conda", "dependencies", "environment"],
+    "dateAdded": "2025-06-28"
   },
   {
-    "id": 5,
-    "title": "React Custom Hook",
-    "description": "Custom hook for managing local storage state",
-    "language": "javascript",
-    "code": "import { useState, useEffect } from 'react';\n\nfunction useLocalStorage(key, initialValue) {\n    const [storedValue, setStoredValue] = useState(() => {\n        try {\n            const item = window.localStorage.getItem(key);\n            return item ? JSON.parse(item) : initialValue;\n        } catch (error) {\n            return initialValue;\n        }\n    });\n\n    const setValue = (value) => {\n        try {\n            setStoredValue(value);\n            window.localStorage.setItem(key, JSON.stringify(value));\n        } catch (error) {\n            console.error(error);\n        }\n    };\n\n    return [storedValue, setValue];\n}",
-    "tags": ["react", "hooks", "localstorage", "custom-hook"],
-    "dateAdded": "2024-01-25"
+    "id": 4,
+    "title": "Export a Conda environment",
+    "description": "There are a number of different ways to export a Conda environment. These must be run from inside an active environment.",
+    "language": "conda",
+    "code": "# from inside a conda env (after activating the env)\nconda list # lists installed packages in the env\nconda env export > env-record.yml # exports all packages and builds\nconda env export --no-builds > exported-env.yml # exports all packages in the env\nconda env export --from-history  > exported-env.yml # exports the packages that were explicitly installed\n\n# Export an environment with pip packages and remove version numbers\n\n# Extract installed pip packages\npip_packages=$(conda env export | grep -A9999 '.*- pip:' | grep -v '^prefix: ' | cut -f1 -d'=')\n\n# Export conda environment without builds, and append pip packages\nconda env export --from-history | grep -v '^prefix: ' > new-environment.yml\necho '$pip_packages' >> new-environment.yml",
+    "tags": ["conda", "dependencies", "environment", "export"],
+    "dateAdded": "2025-06-28"
   },
   {
-    "id": 6,
-    "title": "SQL Join Query",
-    "description": "Complex join query with multiple conditions",
-    "language": "sql",
-    "code": "SELECT \n    u.id,\n    u.username,\n    u.email,\n    p.title as post_title,\n    COUNT(c.id) as comment_count\nFROM users u\nLEFT JOIN posts p ON u.id = p.user_id\nLEFT JOIN comments c ON p.id = c.post_id\nWHERE u.active = 1\n    AND p.published_date >= DATE_SUB(NOW(), INTERVAL 30 DAY)\nGROUP BY u.id, p.id\nORDER BY comment_count DESC, p.published_date DESC;",
-    "tags": ["sql", "joins", "database", "query"],
-    "dateAdded": "2024-01-28"
+    "id": 4,
+    "title": "Essential git commands",
+    "description": "Essental git commands for checking, adding, committing and pushing changes.",
+    "language": "git",
+    "code": "git status # check on status of current git repo\ngit branch NAME # create a branch called NAME\ngit checkout NAME # swap over to the branch called NAME\ngit add FILE # stage FILE for commit\ngit commit # commit the staged files (this will open your text editor to create a commit message)\ngit push origin NAME # push local commits to the remote branch tracking the branch NAME",
+    "tags": ["git", "version control"],
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 4,
+    "title": "Python test template",
+    "description": "This is the suggested test function layout in the Pytest documentation.",
+    "language": "python",
+    "code": "def test_example(self):\n    '''Test for the example function'''\n\n\n    # Arrange\n    test_variable_1 = \n    test_variable_2 = \n    expected_output = \n\n\n    # Act\n    output = your_function(test_variable_1, test_variable_2)\n\n\n    # Assert\n    assert output == expected_output\n\n\n    # Cleanup",
+    "tags": ["python", "testing", "tests", "pytest"],
+    "dateAdded": "2025-06-28"
+  },
+  {
+    "id": 4,
+    "title": "Python test import fix",
+    "description": "If your project folder is called <code>project/</code>, you have your tests in <code>project/tests/</code>, and the code you want to test in <code>project/src/package_name/</code>, add an <code>__init__.py</code> to <code>project/tests/</code> and include the following lines to ensure the imports work correctly.",
+    "language": "python",
+    "code": "import sys\n\nsys.path.append('src')",
+    "tags": ["python", "testing", "tests", "pytest", "imports"],
+    "dateAdded": "2025-06-28"
   }
 ]
